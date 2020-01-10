@@ -1,24 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Mosaic } from 'react-mosaic-component';
+import '@blueprintjs/core/lib/css/blueprint.css';
+import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import './App.css';
+
+const ELEMENT_MAP = {
+  a: <div>Left Window</div>,
+  b: <div>Top Right Window</div>,
+  c: <div>Bottom Right Window</div>,
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app">
+      <Mosaic
+        renderTile={(id) => ELEMENT_MAP[id]}
+        initialValue={{
+          direction: 'row',
+          first: 'a',
+          second: {
+            direction: 'column',
+            first: 'b',
+            second: 'c',
+          },
+          splitPercentage: 40,
+        }}
+      />
     </div>
   );
 }
